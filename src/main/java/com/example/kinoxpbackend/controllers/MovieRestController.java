@@ -2,6 +2,7 @@ package com.example.kinoxpbackend.controllers;
 
 import com.example.kinoxpbackend.models.Movie;
 import com.example.kinoxpbackend.repositories.MovieRepository;
+import com.example.kinoxpbackend.services.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,27 +12,29 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/movies")
+
 public class MovieRestController {
 
     @Autowired
     private MovieRepository movieRepository;
+    @Autowired
+    private MovieService movieService;
 
     @GetMapping("/movies")
-    public ResponseEntity<List<Movie>> findAll() {
-        List<Movie> movies = movieRepository.findAll();
-        return ResponseEntity.ok().body(movies);
+    public List<Movie> findAll() {
+        return movieService.findAll();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/movie/{id}")
     public ResponseEntity<Movie> findById(@PathVariable int id) {
         Optional<Movie> movie = movieRepository.findById(id);
         return movie.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping("/movie")
-    public Movie createMovie (@RequestBody Movie movie ) {
-        return movieRepository.save(movie);
+    public ResponseEntity<Movie> createMovie(@RequestBody Movie movie) {
+        Movie savedMovie = movieService.saveMovie(movie);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedMovie);
     }
 
      @PutMapping("/movie/{id}")
