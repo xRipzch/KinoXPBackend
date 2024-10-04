@@ -11,11 +11,9 @@ import java.util.List;
 @Service
 public class MovieService {
     private final MovieRepository movieRepository;
-    private final RestTemplate restTemplate;
 
-    public MovieService(MovieRepository movieRepository, RestTemplate restTemplate) {
+    public MovieService(MovieRepository movieRepository) {
         this.movieRepository = movieRepository;
-        this.restTemplate = restTemplate;
     }
 
     public Movie saveMovie (Movie movie) {
