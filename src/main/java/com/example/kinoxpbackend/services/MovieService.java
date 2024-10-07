@@ -6,7 +6,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MovieService {
@@ -16,19 +20,24 @@ public class MovieService {
         this.movieRepository = movieRepository;
     }
 
-    public Movie saveMovie (Movie movie) {
-       return movieRepository.save(movie);
-
+    public Movie saveMovie(Movie movie) {
+        return movieRepository.save(movie);
     }
 
     public List<Movie> findAll() {
         return movieRepository.findAll();
     }
 
+    public Optional<Movie> findMovieById(int id){
+         return movieRepository.findById(id);
+    }
+
     public void deleteMovie(Movie movie){
         movieRepository.delete(movie);
         // TODO FK-restraints osv.
     }
+
+
     
 
 }
