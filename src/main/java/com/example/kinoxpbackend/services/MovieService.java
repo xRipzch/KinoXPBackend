@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MovieService {
@@ -17,7 +18,6 @@ public class MovieService {
 
     public MovieService(MovieRepository movieRepository) {
         this.movieRepository = movieRepository;
-
     }
 
     public Movie saveMovie(Movie movie) {
@@ -28,10 +28,16 @@ public class MovieService {
         return movieRepository.findAll();
     }
 
+    public Optional<Movie> findMovieById(int id){
+         return movieRepository.findById(id);
+    }
+
     public void deleteMovie(Movie movie){
         movieRepository.delete(movie);
         // TODO FK-restraints osv.
     }
+
+
     
 
 }

@@ -20,8 +20,6 @@ public class MovieRestController {
     private static final Logger logger = LoggerFactory.getLogger(MovieRestController.class);
 
     @Autowired
-    private MovieRepository movieRepository;
-    @Autowired
     private MovieService movieService;
 
     @GetMapping("/movies")
@@ -31,7 +29,7 @@ public class MovieRestController {
 
     @GetMapping("/movie/{id}")
     public ResponseEntity<Movie> findById(@PathVariable int id) {
-        Optional<Movie> movie = movieRepository.findById(id);
+        Optional<Movie> movie = movieService.findMovieById(id);
         return movie.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
@@ -69,9 +67,9 @@ public class MovieRestController {
 
     @PutMapping("/movie/{id}")
     public ResponseEntity<Movie> updateMovie(@PathVariable int id, @RequestBody Movie movie) {
-        Optional<Movie> optionalMovie = movieRepository.findById(id);
+        Optional<Movie> optionalMovie = movieService.findMovieById(id);
         if(optionalMovie.isPresent()) {
-            movieRepository.save(movie);
+            movieService.saveMovie(movie);
             return ResponseEntity.ok(movie);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
@@ -80,10 +78,10 @@ public class MovieRestController {
 
     @DeleteMapping("/movie/{id}")
     public ResponseEntity<String> deleteMovie(@PathVariable int id) {
-        Optional<Movie> optionalMovie = movieRepository.findById(id);
+        Optional<Movie> optionalMovie = movieService.findMovieById(id);
 
         if (optionalMovie.isPresent()) {
-            movieRepository.delete(optionalMovie.get());
+            movieService.deleteMovie(optionalMovie.get());
             return ResponseEntity.ok("Movie deleted");
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Movie not found");
