@@ -18,12 +18,12 @@ public class Movie {
     private int durationInMinutes;
 
     @Column (nullable = false)
-    private LocalDate releaseYear;
+    private LocalDate releaseYear; // TODO CHANGE TO RELEASE DATE
 
     @Column (nullable = false, length = 1000) // Long varchar because yes.
     private String description;
 
-    @Column (nullable = false, length = 2000) // Long varchar
+    @Column (nullable = false, length = 2000) // Long varchar. TODO Needs to be not null?
     private String imageUrl;
 
     @Column (nullable = false)
