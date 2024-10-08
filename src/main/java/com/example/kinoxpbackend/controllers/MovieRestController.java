@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -34,6 +36,35 @@ public class MovieRestController {
         Optional<Movie> movie = movieRepository.findById(id);
         return movie.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
+
+    @GetMapping("/api/movies")
+    public ResponseEntity<Movie> getMovie(@RequestParam String search) {
+        System.out.println("Search input: " + search);  // Log the input search query
+        try {
+            Integer id = Integer.parseInt(search);  // Trying to parse ID
+            System.out.println("Searching by ID: " + id);
+            Optional<Movie> movie = movieRepository.findById(id);
+            if (movie.isPresent()) {
+                System.out.println("Movie found by ID: " + movie.get());
+                return ResponseEntity.ok(movie.get());
+            } else {
+                System.out.println("No movie found with ID: " + id);
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Searching by title: " + search);
+            Optional<Movie> movie = movieRepository.findByTitleIgnoreCase(search);
+            if (movie.isPresent()) {
+                System.out.println("Movie found by Title: " + movie.get());
+                return ResponseEntity.ok(movie.get());
+            } else {
+                System.out.println("No movie found with Title: " + search);
+            }
+        }
+        System.out.println("Movie not found: " + search);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+    }
+
+
 
     @PostMapping(value = "/movie", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Movie> createMovie(@RequestBody Movie movie) {
@@ -67,14 +98,29 @@ public class MovieRestController {
         }
     }
 
-    @PutMapping("/movie/{id}")
-    public ResponseEntity<Movie> updateMovie(@PathVariable int id, @RequestBody Movie movie) {
-        Optional<Movie> optionalMovie = movieRepository.findById(id);
-        if(optionalMovie.isPresent()) {
-            movieRepository.save(movie);
-            return ResponseEntity.ok(movie);
+    @PutMapping("/api/movies/{id}")
+    public ResponseEntity<Map<String, Object>> updateMovie(@PathVariable Integer id, @RequestBody Movie movie) {
+        Optional<Movie> existingMovie = movieRepository.findById(id);
+
+        if (existingMovie.isPresent()) {
+            Movie updatedMovie = existingMovie.get();
+            updatedMovie.setTitle(movie.getTitle());
+            updatedMovie.setDescription(movie.getDescription());
+            updatedMovie.setDurationInMinutes(movie.getDurationInMinutes());
+            updatedMovie.setReleaseDate(movie.getReleaseDate());
+            updatedMovie.setIs3d(movie.isIs3d());
+            updatedMovie.setImageUrl(movie.getImageUrl());
+
+            movieRepository.save(updatedMovie);  // Save the updated movie
+
+            Map<String, Object> response = new HashMap<>();
+            response.put("success", true);
+            return ResponseEntity.ok(response);  // Return JSON response
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+            Map<String, Object> response = new HashMap<>();
+            response.put("success", false);
+            response.put("message", "Movie not found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
         }
     }
 
