@@ -100,7 +100,7 @@ public class MovieRestController {
     }
 
     @PutMapping("/api/movies/{id}")
-    public ResponseEntity<Map<String, Object>> updateMovie(@PathVariable Integer id, @RequestBody Movie movie) {
+    public ResponseEntity<Movie> updateMovie(@PathVariable Integer id, @RequestBody Movie movie) {
         Optional<Movie> existingMovie = movieRepository.findById(id);
 
         if (existingMovie.isPresent()) {
@@ -113,15 +113,9 @@ public class MovieRestController {
             updatedMovie.setImageUrl(movie.getImageUrl());
 
             movieRepository.save(updatedMovie);  // Save the updated movie
-
-            Map<String, Object> response = new HashMap<>();
-            response.put("success", true);
-            return ResponseEntity.ok(response);  // Return JSON response
+            return ResponseEntity.ok(movie);  // Return JSON response
         } else {
-            Map<String, Object> response = new HashMap<>();
-            response.put("success", false);
-            response.put("message", "Movie not found");
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(movie);
         }
     }
 

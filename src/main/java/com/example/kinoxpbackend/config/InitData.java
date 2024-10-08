@@ -1,6 +1,8 @@
 package com.example.kinoxpbackend.config;
 import com.example.kinoxpbackend.models.*;
 import com.example.kinoxpbackend.repositories.MovieRepository;
+import com.example.kinoxpbackend.repositories.ShowingRepository;
+import com.example.kinoxpbackend.repositories.TheaterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -15,6 +17,11 @@ public class InitData implements CommandLineRunner {
     @Autowired
     MovieRepository movieRepository;
 
+    @Autowired
+    TheaterRepository theaterRepository;
+
+    @Autowired
+    ShowingRepository showingRepository;
     @Override
     public void run(String... args) throws Exception {
         Movie movie1 = new Movie();
@@ -24,6 +31,7 @@ public class InitData implements CommandLineRunner {
         movie1.setReleaseDate(LocalDate.of(2023, 7, 7));
         movie1.setImageUrl("https://i0.wp.com/bloody-disgusting.com/wp-content/uploads/2023/07/saw-x-poster.jpg?resize=740%2C925&ssl=1");
         movieRepository.save(movie1);
+
 
     }
 }
