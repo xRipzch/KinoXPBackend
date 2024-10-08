@@ -10,12 +10,17 @@ import java.util.Optional;
 
 @Service
 public class ShowingService {
-    @Autowired
-    ShowingRepository showingRepository;
+    private final ShowingRepository showingRepository;
+
+
+    public ShowingService(ShowingRepository showingRepository) {
+        this.showingRepository = showingRepository;
+    }
+
+
     public List<Showing> findAll() {
       return   showingRepository.findAll();
     }
-
     public Optional<Showing> findById(int id) {
         return showingRepository.findById(id);
     }

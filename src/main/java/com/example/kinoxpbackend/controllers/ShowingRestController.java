@@ -2,7 +2,6 @@ package com.example.kinoxpbackend.controllers;
 
 import com.example.kinoxpbackend.models.Showing;
 import com.example.kinoxpbackend.services.ShowingService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,8 +12,13 @@ import java.util.Optional;
 @RestController
 public class ShowingRestController {
 
-    @Autowired
-    ShowingService showingService;
+
+private final ShowingService showingService;
+
+    public ShowingRestController(ShowingService showingService) {
+        this.showingService = showingService;
+    }
+
 
     @GetMapping("/showings")
     public List<Showing> findAll() {
