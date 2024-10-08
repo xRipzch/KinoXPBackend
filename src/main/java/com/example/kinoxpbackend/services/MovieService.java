@@ -11,6 +11,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 public class MovieService {
@@ -18,6 +20,7 @@ public class MovieService {
 
     public MovieService(MovieRepository movieRepository) {
         this.movieRepository = movieRepository;
+
     }
 
     public Movie saveMovie(Movie movie) {
@@ -25,19 +28,18 @@ public class MovieService {
     }
 
     public List<Movie> findAll() {
-        return movieRepository.findAll();
+        return StreamSupport.stream(movieRepository.findAll().spliterator(), false)
+                .collect(Collectors.toList());
     }
 
     public Optional<Movie> findMovieById(int id){
-         return movieRepository.findById(id);
+        return movieRepository.findById(id);
     }
 
     public void deleteMovie(Movie movie){
         movieRepository.delete(movie);
         // TODO FK-restraints osv.
     }
-
-
     
 
 }
