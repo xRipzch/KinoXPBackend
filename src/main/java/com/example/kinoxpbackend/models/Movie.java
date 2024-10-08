@@ -18,7 +18,7 @@ public class Movie {
     private int durationInMinutes;
 
     @Column (nullable = false)
-    private LocalDate releaseDate;
+    private LocalDate releaseDate; // TODO CHANGE TO RELEASE DATE
 
     @Column (nullable = false, length = 1000) // Long varchar because yes.
     private String description;
@@ -32,11 +32,11 @@ public class Movie {
     public Movie() {
     }
 
-    public Movie(int id, String title, int durationInMinutes, LocalDate releaseYear, String description, String imageUrl, boolean is3d) {
+    public Movie(int id, String title, int durationInMinutes, LocalDate releaseDate, String description, String imageUrl, boolean is3d) {
         this.id = id;
         this.title = title;
         this.durationInMinutes = durationInMinutes;
-        this.releaseDate = releaseYear;
+        this.releaseDate = releaseDate;
         this.description = description;
         this.imageUrl = imageUrl;
         this.is3d = is3d;
@@ -70,8 +70,8 @@ public class Movie {
         return releaseDate;
     }
 
-    public void setReleaseDate(LocalDate releaseYear) {
-        this.releaseDate = releaseYear;
+    public void setReleaseDate(LocalDate releaseDate) {
+        this.releaseDate = releaseDate;
     }
 
     public String getDescription() {

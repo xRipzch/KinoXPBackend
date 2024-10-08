@@ -15,7 +15,8 @@ public class WebConfig {
                 registry.addMapping("/**")  // Apply CORS to all paths
                         .allowedOrigins("*")  // Allow all origins (or specify your frontend's origin)
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")  // Allow specific HTTP methods
-                        .allowedHeaders("*")  // Allow all headers
+                        .allowedHeaders("*")
+                        .allowedOrigins("http://localhost:63342")// Allow all headers
                         .allowCredentials(false);  // Disable credentials for simplicity
             }
         };
