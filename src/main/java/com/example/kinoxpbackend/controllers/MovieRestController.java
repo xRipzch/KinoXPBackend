@@ -3,7 +3,6 @@ package com.example.kinoxpbackend.controllers;
 import com.example.kinoxpbackend.models.Movie;
 import com.example.kinoxpbackend.repositories.MovieRepository;
 import com.example.kinoxpbackend.services.MovieService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -11,9 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -21,11 +18,14 @@ public class MovieRestController {
 
     private static final Logger logger = LoggerFactory.getLogger(MovieRestController.class);
 
-    @Autowired
-    private MovieService movieService;
+    private final MovieService movieService;
+    private final MovieRepository movieRepository;
 
-    @Autowired
-    private MovieRepository movieRepository;
+    public MovieRestController(MovieService movieService, MovieRepository movieRepository) {
+        this.movieService = movieService;
+        this.movieRepository = movieRepository;
+    }
+
 
     @GetMapping("/movies")
     public List<Movie> findAll() {
