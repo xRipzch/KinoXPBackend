@@ -37,6 +37,10 @@ private final ShowingService showingService;
         return showingService.findAllByDate(date);
     }
 
+    @GetMapping("/showings/{theaterId}/{date}")
+    public List<Showing> findByTheaterAndDate(@PathVariable Long theaterId, @PathVariable LocalDate date) {
+        return showingService.findByTheaterAndDate(theaterId, date);}
+
     @PutMapping("/showing/{id}")
     public ResponseEntity<Showing> updateShowing (@PathVariable Integer id, @RequestBody Showing showing) {
         Optional<Showing> existingShowing = showingService.findById(id);

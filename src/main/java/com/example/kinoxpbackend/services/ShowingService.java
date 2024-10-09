@@ -40,4 +40,8 @@ public class ShowingService {
     public List<Showing> findAllByDate(LocalDate date) {
         return showingRepository.findAllByDate(date);
     }
+
+    public List<Showing> findByTheaterAndDate(Long theaterId, LocalDate date) {
+        return showingRepository.findByTheaterAndDate(theaterId, date);
+    }
 }

@@ -12,6 +12,8 @@ import java.util.List;
 public interface ShowingRepository extends JpaRepository<Showing, Integer>{
       @Query("SELECT s FROM Showing s WHERE DATE(s.startTime) = :date")
       List<Showing> findAllByDate(@Param("date") LocalDate date);
-   }
+
+    List<Showing> findByTheaterAndDate(Long theaterId, LocalDate date);
+}
 
 
