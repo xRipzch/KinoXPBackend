@@ -6,6 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,7 +21,6 @@ private final ShowingService showingService;
         this.showingService = showingService;
     }
 
-
     @GetMapping("/showings")
     public List<Showing> findAll() {
         return showingService.findAll();
@@ -29,6 +30,11 @@ private final ShowingService showingService;
     public ResponseEntity<Showing> findById(@PathVariable int id) {
         Optional<Showing> optionalShowing = showingService.findById(id);
         return optionalShowing.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/showings/{date}")
+    public List<Showing> findByDate (@PathVariable LocalDate date) {
+        return showingService.findAllByDate(date);
     }
 
     @PutMapping("/showing/{id}")
