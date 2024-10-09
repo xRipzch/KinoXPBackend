@@ -25,7 +25,7 @@ public class InitData implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         Movie movie1 = new Movie();
-        movie1.setTitle("Saw X");
+        movie1.setTitle("AVATAR SAW COLAB");
         movie1.setDescription("Lots of gore");
         movie1.setDurationInMinutes(118);
         movie1.setReleaseDate(LocalDate.of(2023, 7, 7));
