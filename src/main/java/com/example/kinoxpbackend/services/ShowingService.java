@@ -44,4 +44,8 @@ public class ShowingService {
     public List<Showing> findByTheaterAndDate(Long theaterId, LocalDate date) {
         return showingRepository.findByTheaterAndDate(theaterId, date);
     }
+
+    public List<Showing> findByMovieAndDate(int movieId, LocalDate date) {
+        return showingRepository.findByMovieAndDate(movieId, date);
+    }
 }
