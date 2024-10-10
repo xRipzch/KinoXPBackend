@@ -8,7 +8,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-
+/*
 @Component
 public class InitData implements CommandLineRunner {
 
@@ -22,6 +22,7 @@ public class InitData implements CommandLineRunner {
 
     @Autowired
     ShowingRepository showingRepository;
+
     @Override
     public void run(String... args) throws Exception {
         Movie movie1 = new Movie();
@@ -41,3 +42,4 @@ public class InitData implements CommandLineRunner {
 
     }
 }
+ */
