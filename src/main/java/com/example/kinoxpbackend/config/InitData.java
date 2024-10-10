@@ -1,3 +1,4 @@
+
 package com.example.kinoxpbackend.config;
 import com.example.kinoxpbackend.models.*;
 import com.example.kinoxpbackend.repositories.MovieRepository;
@@ -8,7 +9,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-
+/*
 @Component
 public class InitData implements CommandLineRunner {
 
@@ -41,3 +42,4 @@ public class InitData implements CommandLineRunner {
 
     }
 }
+*/
