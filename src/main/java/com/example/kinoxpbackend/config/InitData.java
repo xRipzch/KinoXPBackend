@@ -24,7 +24,7 @@ public class InitData implements CommandLineRunner {
     ShowingRepository showingRepository;
     @Override
     public void run(String... args) throws Exception {
-        
+
 
 
 
