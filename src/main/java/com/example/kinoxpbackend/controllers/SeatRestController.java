@@ -1,6 +1,5 @@
 package com.example.kinoxpbackend.controllers;
 
-import com.example.kinoxpbackend.models.Movie;
 import com.example.kinoxpbackend.models.Seat;
 import com.example.kinoxpbackend.services.SeatService;
 import org.springframework.beans.factory.annotation.Autowired;
