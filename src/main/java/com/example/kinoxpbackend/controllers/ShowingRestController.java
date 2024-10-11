@@ -37,6 +37,11 @@ private final ShowingService showingService;
         return showingService.findAllByDate(date);
     }
 
+    @GetMapping("/showings/movie={movieId}/{date}")
+    public List<Showing> findByMovieAndDate(@PathVariable int movieId, @PathVariable LocalDate date) {
+        return showingService.findByMovieAndDate(movieId, date);
+    }
+
     @GetMapping("/showings/{theaterId}/{date}")
     public List<Showing> findByTheaterAndDate(@PathVariable Long theaterId, @PathVariable LocalDate date) {
         return showingService.findByTheaterAndDate(theaterId, date);}
