@@ -3,7 +3,6 @@ package com.example.kinoxpbackend.controllers;
 import com.example.kinoxpbackend.models.Movie;
 import com.example.kinoxpbackend.repositories.MovieRepository;
 import com.example.kinoxpbackend.services.MovieService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -11,9 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -21,11 +18,14 @@ public class MovieRestController {
 
     private static final Logger logger = LoggerFactory.getLogger(MovieRestController.class);
 
-    @Autowired
-    private MovieService movieService;
+    private final MovieService movieService;
+    private final MovieRepository movieRepository;
 
-    @Autowired
-    private MovieRepository movieRepository;
+    public MovieRestController(MovieService movieService, MovieRepository movieRepository) {
+        this.movieService = movieService;
+        this.movieRepository = movieRepository;
+    }
+
 
     @GetMapping("/movies")
     public List<Movie> findAll() {
@@ -100,7 +100,7 @@ public class MovieRestController {
     }
 
     @PutMapping("/api/movies/{id}")
-    public ResponseEntity<Map<String, Object>> updateMovie(@PathVariable Integer id, @RequestBody Movie movie) {
+    public ResponseEntity<Movie> updateMovie(@PathVariable Integer id, @RequestBody Movie movie) {
         Optional<Movie> existingMovie = movieRepository.findById(id);
 
         if (existingMovie.isPresent()) {
@@ -113,15 +113,9 @@ public class MovieRestController {
             updatedMovie.setImageUrl(movie.getImageUrl());
 
             movieRepository.save(updatedMovie);  // Save the updated movie
-
-            Map<String, Object> response = new HashMap<>();
-            response.put("success", true);
-            return ResponseEntity.ok(response);  // Return JSON response
+            return ResponseEntity.ok(movie);  // Return JSON response
         } else {
-            Map<String, Object> response = new HashMap<>();
-            response.put("success", false);
-            response.put("message", "Movie not found");
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(movie);
         }
     }
 

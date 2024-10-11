@@ -18,7 +18,7 @@ public class Movie {
     private int durationInMinutes;
 
     @Column (nullable = false)
-    private LocalDate releaseDate; // TODO CHANGE TO RELEASE DATE
+    private LocalDate releaseDate; //
 
     @Column (nullable = false, length = 1000) // Long varchar because yes.
     private String description;

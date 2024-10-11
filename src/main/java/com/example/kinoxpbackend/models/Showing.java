@@ -1,6 +1,7 @@
 package com.example.kinoxpbackend.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
@@ -10,14 +11,12 @@ public class Showing {
     @GeneratedValue (strategy = GenerationType.IDENTITY) // Auto increment
     private int id;
 
-    @ManyToOne // Foreign key to id in movie. Not null.
+    @ManyToOne // Foreign key to id in movie. Not null. Eager to load with showing.
     @JoinColumn(name = "movie_id", referencedColumnName = "id", nullable = false)
-    @JsonBackReference
     private Movie movie;
 
     @ManyToOne // Foreign key to id in theater. Not null.
     @JoinColumn(name = "theater_id", referencedColumnName = "id", nullable = false)
-    @JsonBackReference
     private Theater theater;
 
     @Column (nullable = false)
