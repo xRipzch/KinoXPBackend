@@ -21,6 +21,10 @@ public class SeatRestController {
         this.seatService = seatService;
 
     }
+    
+    
+
+    
     @GetMapping("/seats/{theaterId}")
     List<Seat> findAllByTheaterId(@PathVariable int theaterId) {
         return seatService.findAllByTheaterId(theaterId);
