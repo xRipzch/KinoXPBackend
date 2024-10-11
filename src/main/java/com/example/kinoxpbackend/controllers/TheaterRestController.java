@@ -1,8 +1,5 @@
 package com.example.kinoxpbackend.controllers;
-import com.example.kinoxpbackend.models.Movie;
-import com.example.kinoxpbackend.models.Showing;
 import com.example.kinoxpbackend.models.Theater;
-import com.example.kinoxpbackend.services.ShowingService;
 import com.example.kinoxpbackend.services.TheaterService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
