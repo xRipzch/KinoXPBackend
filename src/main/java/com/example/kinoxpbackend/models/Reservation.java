@@ -11,7 +11,6 @@ public class Reservation {
 
     @ManyToOne // Foreign key to id in showing. Not null.
     @JoinColumn(name = "showing_id", referencedColumnName = "id", nullable = false)
-    @JsonBackReference
     private Showing showing;
 
     @Column (nullable = false)

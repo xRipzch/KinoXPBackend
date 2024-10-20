@@ -31,6 +31,4 @@ public class SeatRestController {
         Optional<Seat> seat = seatService.findSeatById(id);
         return seat.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
-
-
 }

@@ -1,6 +1,5 @@
 package com.example.kinoxpbackend.services;
 
-import com.example.kinoxpbackend.models.Seat;
 import com.example.kinoxpbackend.models.TempReservedSeat;
 import com.example.kinoxpbackend.repositories.TempReservedSeatRepository;
 import org.springframework.stereotype.Service;
@@ -21,7 +20,7 @@ public class TempReservedSeatService {
         return tempReservedSeatRepository.findAllByShowingId(showingId);
     }
 
-    public Optional<TempReservedSeat> findSeatById(int id) {
+    public Optional<TempReservedSeat> findById(int id) {
         return tempReservedSeatRepository.findById(id);
     }
 }

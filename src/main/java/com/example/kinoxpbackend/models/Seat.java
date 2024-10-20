@@ -12,12 +12,10 @@ public class Seat {
 
     @ManyToOne // Foreign key to id in theater. Not null.
     @JoinColumn(name = "theater_id", referencedColumnName = "id", nullable = false)
-    @JsonBackReference
     private Theater theater;
 
     @ManyToOne // Foreign key to id in seatType. Not null.
     @JoinColumn(name = "seat_type_id", referencedColumnName = "id", nullable = false)
-    @JsonBackReference
     private SeatType seatType;
 
     @Column(nullable = false)
