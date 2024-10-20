@@ -11,12 +11,10 @@ public class TempReservedSeat {
 
     @ManyToOne // Foreign key to id in showing. Not null.
     @JoinColumn(name = "showing_id", referencedColumnName = "id", nullable = false)
-    @JsonBackReference
     private Showing showing;
 
     @ManyToOne // Foreign key to id in seat. Not null.
     @JoinColumn(name = "seat_id", referencedColumnName = "id", nullable = false)
-    @JsonBackReference
     private Seat seat;
 
     public TempReservedSeat(int id, Showing showing, Seat seat) {

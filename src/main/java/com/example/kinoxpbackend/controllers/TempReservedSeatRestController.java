@@ -26,8 +26,8 @@ public class TempReservedSeatRestController {
 
     @GetMapping("/temp-reserved-seat/{id}")
     public ResponseEntity<TempReservedSeat> findById(@PathVariable int id) {
-        Optional<TempReservedSeat> seat = tempReservedSeatService.findSeatById(id);
-        return seat.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+        Optional<TempReservedSeat> tempReservedSeat = tempReservedSeatService.findById(id);
+        return tempReservedSeat.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 }
 
